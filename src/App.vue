@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue';
+  import { reactive } from 'vue';
 import Cabecalho from './components/Cabecalho.vue';
 import Formulario from './components/Formulario.vue';
 
@@ -58,11 +58,12 @@ import Formulario from './components/Formulario.vue';
 </script>
 
 <template>
-  <Cabecalho/>
+   <Cabecalho/>
   <div class="container">
       <Formulario :resultado="estado.resultado" :altera-o-tipo-da-operacao="alteraOTipoDaOperacao" :realizar-conta="realizarConta"/>
   </div>
 </template>
 
 <style scoped>
+
 </style>
