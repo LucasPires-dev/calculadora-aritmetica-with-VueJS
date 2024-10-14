@@ -1,24 +1,27 @@
 <script setup>
-    const props = defineProps(['alteraOTipoDaOperacao','realizarConta', 'resultado'])
+const props = defineProps(['alteraOTipoDaOperacao', 'calcular', 'resultado', 'getNumber1', 'getNumber2'])
 </script>
 
 <template>
-    <form @submit.prevent="" class="pt-5">
-    <div class="row">
-      <div class="col-4 text-center" style="border: 2px solid black">
-      <span class="text-center m-0 p-0">{{ props.resultado }}</span>
+  <div class="card mx-auto" style="max-width: 360px; width: 100%;">
+    <div class="card-body">
+      <div class="mb-3">
+        <input type="number" class="form-control" id="num1" placeholder="Primeiro Número" @change="getNumber1">
       </div>
-      <div class="col-4">
-        <select @change="props.alteraOTipoDaOperacao" class="form-control text-center">
-          <option value="adicao">+ Somar</option>
-          <option value="subtracao">- Subtrair</option>
-          <option value="multiplicacao">* Multiplicar</option>
-          <option value="divisao">/ Dividir</option>
+      <div class="mb-3">
+        <input type="number" class="form-control" id="num2" placeholder="Segundo Número" @change="getNumber2">
+      </div>
+      <div class="mb-3">
+        <select class="form-select" id="operacao" @change="alteraOTipoDaOperacao">
+          <option value="">Selecione a Operação</option>
+          <option value="soma">Soma</option>
+          <option value="subtracao">Subtração</option>
+          <option value="multiplicacao">Multiplicação</option>
+          <option value="divisao">Divisão</option>
         </select>
       </div>
-      <div class="col-4">
-        <input @change="props.realizarConta" type="number" class="form-control text-center">
-      </div>
+      <button class="btn btn-success w-100" id="calcular" @click="calcular" disabled>Calcular</button>
+      <div id="resultado" class="mt-3 text-center" ><strong>Resultado: {{ resultado() }}</strong></div>
     </div>
-  </form>
+  </div>
 </template>

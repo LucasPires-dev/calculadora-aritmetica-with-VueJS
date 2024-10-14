@@ -1,6 +1,5 @@
 <template>
-    <header class="bg-primary text-center py-4">
-    <h1>Calculate</h1>
-
-  </header>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Calculadora Aritmética</h1>
+    </header>
 </template>

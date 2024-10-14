@@ -4,44 +4,57 @@ import Cabecalho from './components/Cabecalho.vue';
 import Formulario from './components/Formulario.vue';
 
   const estado = reactive({
-    input: 10,
-    tipoDaOperacao: "adicao",
-    resultado: 0
+    campo1: 0,
+    campo2: 0,
+    tipoDaOperacao: null,
+    resultado: ''
   })
+
+
 
   const alteraOTipoDaOperacao = (evento ) => {
     estado.tipoDaOperacao = evento.target.value
+    calcular()
   }
 
-  const realizarConta = (evento) => {
-    
-    const {tipoDaOperacao, input} = estado;
+  const getNumber1 = (evento) => {
+    estado.campo1 = parseInt(evento.target.value)
+    calcular()
+    // estado.resultado = parseInt(campo1) + estado.campo2
+  }
 
-    estado.input = evento.target.value
+  const getNumber2 = (evento) => {
+    estado.campo2 = parseInt(evento.target.value)
+    calcular()
+    // estado.resultado = parseInt(campo2) + estado.campo1
+  }
 
+  const calcular = () => {
+    console.log(estado)
+    const {tipoDaOperacao, campo1, campo2, resultado} = estado;
 
     const somar =() => {
-      estado.resultado = estado.resultado + parseInt(estado.input)
+      estado.resultado = parseInt(campo2) + parseInt(campo1)
   }
 
   const subtrair =() => {
-    estado.resultado = estado.resultado - parseInt(estado.input)
+    estado.resultado = parseInt(campo2) - parseInt(campo1)
   }
 
   const multiplicar =() => {
-    estado.resultado = estado.resultado * parseInt(estado.input)
+    estado.resultado = parseInt(campo2) * parseInt(campo1)
   }
 
   const dividir =() => {
-    if(parseInt(estado.input) === 0){
+    if(parseInt(campo1) === 0){
       alert("Erro: Não é possível divisão por ZERO!")
     }else{
-    estado.resultado = estado.resultado / parseInt(estado.input)
+    estado.resultado = parseInt(campo1) / parseInt(campo2)
   }
   }
 
     switch (tipoDaOperacao) {
-      case 'adicao':
+      case 'soma':
         return somar()
       
       case 'subtracao':
@@ -52,16 +65,26 @@ import Formulario from './components/Formulario.vue';
 
       case 'divisao':
         return dividir()
+
+      default:
+        return null
     }
+
+  }
+
+  const resultado = () => {
+    return estado.resultado
   }
 
 </script>
 
 <template>
    <Cabecalho/>
-  <div class="container">
-      <Formulario :resultado="estado.resultado" :altera-o-tipo-da-operacao="alteraOTipoDaOperacao" :realizar-conta="realizarConta"/>
-  </div>
+    <main class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 60px);">
+        <div class="container">
+            <Formulario :altera-o-tipo-da-operacao="alteraOTipoDaOperacao" :calcular="calcular" :get-number1="getNumber1" :get-number2="getNumber2" :resultado="resultado" />
+        </div>
+    </main>
 </template>
 
 <style scoped>
